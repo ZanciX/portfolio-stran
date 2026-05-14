@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Professional portfolio — Web Design, AI Videos, and Translation services." />
+<title>Portfolio — Web Design · AI Videos · Translation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050509;
+    --bg-2: #0a0a14;
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-2: rgba(255, 255, 255, 0.05);
+    --text: #e8ecff;
+    --text-dim: #9aa3c7;
+    --text-muted: #6b7396;
+    --accent-blue: #00d4ff;
+    --accent-purple: #a855f7;
+    --accent-pink: #ec4899;
+    --border: rgba(168, 85, 247, 0.15);
+    --border-hover: rgba(0, 212, 255, 0.4);
+    --glow-blue: 0 0 40px rgba(0, 212, 255, 0.35);
+    --glow-purple: 0 0 40px rgba(168, 85, 247, 0.35);
+    --gradient: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #ec4899 100%);
+    --gradient-soft: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Animated background orbs */
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    pointer-events: none;
+    animation: floatOrb 20s ease-in-out infinite;
+  }
+  body::before {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.25), transparent 70%);
+    top: -200px; left: -150px;
+  }
+  body::after {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.22), transparent 70%);
+    top: 40%; right: -200px;
+    animation-delay: -10s;
+  }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -40px) scale(1.1); }
+  }
+
+  /* Grid background */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    backdrop-filter: blur(20px);
+    background: rgba(5, 5, 9, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    padding: 0.85rem 2rem;
+    background: rgba(5, 5, 9, 0.85);
+    border-bottom-color: rgba(168, 85, 247, 0.2);
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    position: relative;
+  }
+  .logo::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: var(--gradient);
+    filter: blur(20px);
+    opacity: 0.25;
+    z-index: -1;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--surface); }
+
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    position: relative;
+    font-family: inherit;
+    user-select: none;
+  }
+  .lang-toggle span {
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    position: relative;
+  }
+  .lang-toggle span.active {
+    color: white;
+    background: var(--gradient);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+
+  .menu-toggle {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1.5rem 4rem;
+    position: relative;
+  }
+  .hero-content {
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 0.8s ease 0.1s backwards;
+  }
+  .badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 12px var(--accent-blue);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s ease 0.2s backwards;
+  }
+  h1 .gradient {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+  }
+  h1 .gradient::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: blur(28px);
+    opacity: 0.5;
+    z-index: -1;
+  }
+
+  .hero p.tagline {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--text-dim);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.9s ease 0.35s backwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.5s backwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    filter: blur(20px);
+    opacity: 0.6;
+    z-index: -1;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(168, 85, 247, 0.6);
+  }
+  .btn-primary:hover::before { opacity: 0.9; }
+
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+  }
+  .btn-ghost:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+    box-shadow: var(--glow-blue);
+    transform: translateY(-3px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sections */
+  section {
+    padding: 6rem 1.5rem;
+    position: relative;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    text-shadow: 0 0 20px var(--accent-blue);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-title .gradient {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .section-subtitle {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.75rem;
+  }
+  .service-card {
+    position: relative;
+    padding: 2.25rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-soft);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: var(--gradient);
+    opacity: 0;
+    z-index: -1;
+    filter: blur(20px);
+    transition: opacity 0.4s ease;
+  }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 212, 255, 0.4);
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover::after { opacity: 0.5; }
+
+  .service-icon {
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    background: var(--gradient-soft);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent-blue);
+    transition: all 0.4s ease;
+  }
+  .service-card:hover .service-icon {
+    background: var(--gradient);
+    color: white;
+    box-shadow: var(--glow-purple);
+    transform: scale(1.05) rotate(-5deg);
+  }
+  .service-icon svg { width: 28px; height: 28px; }
+
+  .service-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+  .service-card p {
+    color: var(--text-dim);
+    font-size: 0.97rem;
+    margin-bottom: 1.5rem;
+  }
+  .service-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .service-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+  }
+  .service-features li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px var(--accent-blue);
+    flex-shrink: 0;
+  }
+
+  /* Why Choose Me */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .why-card {
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .why-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+  }
+  .why-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+  }
+  .why-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .why-card p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+
+  /* Contact */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .contact-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .contact-info p {
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+  .contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+  }
+  .contact-list li:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    box-shadow: var(--glow-blue);
+  }
+  .contact-list .icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--gradient-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    flex-shrink: 0;
+  }
+  .contact-list .icon svg { width: 20px; height: 20px; }
+
+  form.contact-form {
+    padding: 2.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .field { margin-bottom: 1rem; }
+  .field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    outline: none;
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--accent-blue);
+    background: rgba(0, 212, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15), 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-muted); }
+
+  .form-success {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--accent-blue);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .form-success.show { display: block; animation: fadeUp 0.4s ease; }
+
+  /* Footer */
+  footer {
+    padding: 3rem 1.5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    background: rgba(5, 5, 9, 0.5);
+    backdrop-filter: blur(20px);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+  }
+  footer p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 2rem 0 1.5rem;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile */
+  @media (max-width: 860px) {
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 1rem;
+      right: 1rem;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem;
+      background: rgba(5, 5, 9, 0.98);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      backdrop-filter: blur(20px);
+      margin-top: 0.5rem;
+    }
+    .nav-links.open a { padding: 0.75rem 1rem; }
+    .menu-toggle { display: flex; }
+    section { padding: 4.5rem 1.25rem; }
+    .hero { padding-top: 7rem; }
+    .form-row { grid-template-columns: 1fr; }
+    form.contact-form { padding: 1.5rem; }
+    .service-card { padding: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">PORTFOLIO</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="#why" data-i18n="nav.why">Why Me</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+        <span class="active" data-lang="en">EN</span>
+        <span data-lang="sl">SL</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="badge">
+      <span class="dot"></span>
+      <span data-i18n="hero.badge">Available for new projects</span>
+    </div>
+    <h1>
+      <span data-i18n="hero.title.1">Hi, I'm</span>
+      <span class="gradient" data-text="Your Name" data-i18n="hero.name">Your Name</span><br>
+      <span data-i18n="hero.title.2">Crafting digital experiences</span>
+    </h1>
+    <p class="tagline" data-i18n="hero.tagline">
+      Web developer, AI video creator, and translator — turning ideas into polished, modern work that gets noticed.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">
+        <span data-i18n="hero.cta.primary">Start a project</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#services" class="btn btn-ghost" data-i18n="hero.cta.secondary">See services</a>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-i18n="services.tag">What I do</div>
+      <h2 class="section-title">
+        <span data-i18n="services.title.1">Services that</span>
+        <span class="gradient" data-i18n="services.title.2">deliver results</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="services.subtitle">Three core offerings, each built to make your business stand out.</p>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <h3 data-i18n="services.web.title">Web Design &amp; Development</h3>
+        <p data-i18n="services.web.desc">Professional, fast-loading websites that look incredible on every device and convert visitors into customers.</p>
+        <ul class="service-features">
+          <li data-i18n="services.web.f1">Modern responsive design</li>
+          <li data-i18n="services.web.f2">SEO-ready &amp; lightning fast</li>
+          <li data-i18n="services.web.f3">Custom animations &amp; effects</li>
+        </ul>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+          </svg>
+        </div>
+        <h3 data-i18n="services.video.title">Short AI Videos</h3>
+        <p data-i18n="services.video.desc">Eye-catching short videos powered by AI — with or without AI characters. Your call, your style.</p>
+        <ul class="service-features">
+          <li data-i18n="services.video.f1">With or without AI characters</li>
+          <li data-i18n="services.video.f2">Perfect for ads &amp; social media</li>
+          <li data-i18n="services.video.f3">Fast turnaround</li>
+        </ul>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+          </svg>
+        </div>
+        <h3 data-i18n="services.translation.title">Text Translation</h3>
+        <p data-i18n="services.translation.desc">Accurate translations between languages that keep the meaning, tone, and personality of your original text.</p>
+        <ul class="service-features">
+          <li data-i18n="services.translation.f1">Multiple language pairs</li>
+          <li data-i18n="services.translation.f2">Tone &amp; nuance preserved</li>
+          <li data-i18n="services.translation.f3">Quick delivery</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-i18n="why.tag">Why work with me</div>
+      <h2 class="section-title">
+        <span data-i18n="why.title.1">Built to</span>
+        <span class="gradient" data-i18n="why.title.2">exceed expectations</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="why.subtitle">A handful of reasons clients keep coming back.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-number">01</div>
+        <h4 data-i18n="why.1.title">Quality first</h4>
+        <p data-i18n="why.1.desc">Every project gets meticulous attention — no shortcuts, no compromises.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-number">02</div>
+        <h4 data-i18n="why.2.title">Fast turnaround</h4>
+        <p data-i18n="why.2.desc">Clear timelines and reliable delivery, without sacrificing the craft.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-number">03</div>
+        <h4 data-i18n="why.3.title">Direct communication</h4>
+        <p data-i18n="why.3.desc">You talk to me, not a project manager. Quick answers, no runaround.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-number">04</div>
+        <h4 data-i18n="why.4.title">Modern toolset</h4>
+        <p data-i18n="why.4.desc">Latest tech, AI tools, and best practices — built for today's audience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-i18n="contact.tag">Get in touch</div>
+      <h2 class="section-title">
+        <span data-i18n="contact.title.1">Let's build something</span>
+        <span class="gradient" data-i18n="contact.title.2">remarkable</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="contact.subtitle">Tell me about your project and I'll get back to you within 24 hours.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h3 data-i18n="contact.info.title">Let's talk</h3>
+        <p data-i18n="contact.info.desc">Whether it's a website, a video, or a translation — drop me a line and we'll figure it out together.</p>
+        <ul class="contact-list">
+          <li>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <span>hello@yourdomain.com</span>
+          </li>
+          <li>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span data-i18n="contact.info.phone">+386 00 000 000</span>
+          </li>
+          <li>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span data-i18n="contact.info.location">Slovenia, Europe</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="name" data-i18n="form.name">Your name</label>
+            <input type="text" id="name" name="name" required data-i18n-placeholder="form.name.ph" placeholder="John Doe" />
+          </div>
+          <div class="field">
+            <label for="email" data-i18n="form.email">Email</label>
+            <input type="email" id="email" name="email" required data-i18n-placeholder="form.email.ph" placeholder="you@email.com" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="service" data-i18n="form.service">I'm interested in</label>
+          <select id="service" name="service">
+            <option value="web" data-i18n="form.service.web">Web Design &amp; Development</option>
+            <option value="video" data-i18n="form.service.video">Short AI Videos</option>
+            <option value="translation" data-i18n="form.service.translation">Text Translation</option>
+            <option value="other" data-i18n="form.service.other">Something else</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message" data-i18n="form.message">Project details</label>
+          <textarea id="message" name="message" required data-i18n-placeholder="form.message.ph" placeholder="Tell me a bit about what you have in mind..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+          <span data-i18n="form.submit">Send message</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+
+        <div class="form-success" id="formSuccess" data-i18n="form.success">Thanks! Your message is on its way. I'll be in touch within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">PORTFOLIO</div>
+    <p data-i18n="footer.tagline">Web Design · AI Videos · Translation</p>
+    <div class="footer-divider"></div>
+    <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">All rights reserved.</span></p>
+  </div>
+</footer>
+
+<script>
+  // ---------- i18n ----------
+  const translations = {
+    en: {
+      'nav.services': 'Services',
+      'nav.why': 'Why Me',
+      'nav.contact': 'Contact',
+      'hero.badge': 'Available for new projects',
+      'hero.title.1': "Hi, I'm",
+      'hero.name': 'Your Name',
+      'hero.title.2': 'Crafting digital experiences',
+      'hero.tagline': 'Web developer, AI video creator, and translator — turning ideas into polished, modern work that gets noticed.',
+      'hero.cta.primary': 'Start a project',
+      'hero.cta.secondary': 'See services',
+      'services.tag': 'What I do',
+      'services.title.1': 'Services that',
+      'services.title.2': 'deliver results',
+      'services.subtitle': 'Three core offerings, each built to make your business stand out.',
+      'services.web.title': 'Web Design & Development',
+      'services.web.desc': 'Professional, fast-loading websites that look incredible on every device and convert visitors into customers.',
+      'services.web.f1': 'Modern responsive design',
+      'services.web.f2': 'SEO-ready & lightning fast',
+      'services.web.f3': 'Custom animations & effects',
+      'services.video.title': 'Short AI Videos',
+      'services.video.desc': 'Eye-catching short videos powered by AI — with or without AI characters. Your call, your style.',
+      'services.video.f1': 'With or without AI characters',
+      'services.video.f2': 'Perfect for ads & social media',
+      'services.video.f3': 'Fast turnaround',
+      'services.translation.title': 'Text Translation',
+      'services.translation.desc': 'Accurate translations between languages that keep the meaning, tone, and personality of your original text.',
+      'services.translation.f1': 'Multiple language pairs',
+      'services.translation.f2': 'Tone & nuance preserved',
+      'services.translation.f3': 'Quick delivery',
+      'why.tag': 'Why work with me',
+      'why.title.1': 'Built to',
+      'why.title.2': 'exceed expectations',
+      'why.subtitle': 'A handful of reasons clients keep coming back.',
+      'why.1.title': 'Quality first',
+      'why.1.desc': 'Every project gets meticulous attention — no shortcuts, no compromises.',
+      'why.2.title': 'Fast turnaround',
+      'why.2.desc': 'Clear timelines and reliable delivery, without sacrificing the craft.',
+      'why.3.title': 'Direct communication',
+      'why.3.desc': 'You talk to me, not a project manager. Quick answers, no runaround.',
+      'why.4.title': 'Modern toolset',
+      'why.4.desc': "Latest tech, AI tools, and best practices — built for today's audience.",
+      'contact.tag': 'Get in touch',
+      'contact.title.1': "Let's build something",
+      'contact.title.2': 'remarkable',
+      'contact.subtitle': "Tell me about your project and I'll get back to you within 24 hours.",
+      'contact.info.title': "Let's talk",
+      'contact.info.desc': "Whether it's a website, a video, or a translation — drop me a line and we'll figure it out together.",
+      'contact.info.phone': '+386 00 000 000',
+      'contact.info.location': 'Slovenia, Europe',
+      'form.name': 'Your name',
+      'form.name.ph': 'John Doe',
+      'form.email': 'Email',
+      'form.email.ph': 'you@email.com',
+      'form.service': "I'm interested in",
+      'form.service.web': 'Web Design & Development',
+      'form.service.video': 'Short AI Videos',
+      'form.service.translation': 'Text Translation',
+      'form.service.other': 'Something else',
+      'form.message': 'Project details',
+      'form.message.ph': 'Tell me a bit about what you have in mind...',
+      'form.submit': 'Send message',
+      'form.success': "Thanks! Your message is on its way. I'll be in touch within 24 hours.",
+      'footer.tagline': 'Web Design · AI Videos · Translation',
+      'footer.rights': 'All rights reserved.'
+    },
+    sl: {
+      'nav.services': 'Storitve',
+      'nav.why': 'Zakaj jaz',
+      'nav.contact': 'Kontakt',
+      'hero.badge': 'Na voljo za nove projekte',
+      'hero.title.1': 'Pozdravljeni, sem',
+      'hero.name': 'Vaše ime',
+      'hero.title.2': 'Ustvarjam digitalne izkušnje',
+      'hero.tagline': 'Spletni razvijalec, ustvarjalec AI videov in prevajalec — vaše ideje spreminjam v dovršeno, moderno delo, ki pritegne pozornost.',
+      'hero.cta.primary': 'Začni projekt',
+      'hero.cta.secondary': 'Oglej si storitve',
+      'services.tag': 'Kaj počnem',
+      'services.title.1': 'Storitve, ki',
+      'services.title.2': 'prinašajo rezultate',
+      'services.subtitle': 'Tri glavne storitve, vsaka ustvarjena, da vaš posel izstopa.',
+      'services.web.title': 'Spletno oblikovanje in razvoj',
+      'services.web.desc': 'Profesionalne, hitro nalagajoče spletne strani, ki izvrstno izgledajo na vsaki napravi in obiskovalce spreminjajo v stranke.',
+      'services.web.f1': 'Sodoben odziven dizajn',
+      'services.web.f2': 'SEO optimizirano in bliskovito hitro',
+      'services.web.f3': 'Lastne animacije in efekti',
+      'services.video.title': 'Kratki AI videi',
+      'services.video.desc': 'Privlačni kratki videi z AI tehnologijo — z AI liki ali brez. Vaša izbira, vaš slog.',
+      'services.video.f1': 'Z AI liki ali brez',
+      'services.video.f2': 'Idealno za oglase in družbena omrežja',
+      'services.video.f3': 'Hitra izvedba',
+      'services.translation.title': 'Prevajanje besedil',
+      'services.translation.desc': 'Natančni prevodi med jeziki, ki ohranjajo pomen, ton in osebnost vašega izvirnega besedila.',
+      'services.translation.f1': 'Več jezikovnih kombinacij',
+      'services.translation.f2': 'Ohranjen ton in nianse',
+      'services.translation.f3': 'Hitra dostava',
+      'why.tag': 'Zakaj sodelovati z mano',
+      'why.title.1': 'Ustvarjeno za',
+      'why.title.2': 'preseganje pričakovanj',
+      'why.subtitle': 'Nekaj razlogov, zakaj se stranke vedno znova vračajo.',
+      'why.1.title': 'Kakovost na prvem mestu',
+      'why.1.desc': 'Vsak projekt dobi natančno pozornost — brez bližnjic, brez kompromisov.',
+      'why.2.title': 'Hitra izvedba',
+      'why.2.desc': 'Jasni roki in zanesljiva dostava, brez kompromisov pri kakovosti.',
+      'why.3.title': 'Direktna komunikacija',
+      'why.3.desc': 'Govorite z mano, ne s project managerjem. Hitri odgovori, brez zapletov.',
+      'why.4.title': 'Sodobna orodja',
+      'why.4.desc': 'Najnovejša tehnologija, AI orodja in najboljše prakse — ustvarjeno za današnje občinstvo.',
+      'contact.tag': 'Pišite mi',
+      'contact.title.1': 'Skupaj ustvarimo nekaj',
+      'contact.title.2': 'izjemnega',
+      'contact.subtitle': 'Povejte mi o svojem projektu in odgovoril vam bom v 24 urah.',
+      'contact.info.title': 'Pogovoriva se',
+      'contact.info.desc': 'Naj gre za spletno stran, video ali prevod — pišite mi in skupaj bova našla rešitev.',
+      'contact.info.phone': '+386 00 000 000',
+      'contact.info.location': 'Slovenija, Evropa',
+      'form.name': 'Vaše ime',
+      'form.name.ph': 'Janez Novak',
+      'form.email': 'E-pošta',
+      'form.email.ph': 'vi@email.com',
+      'form.service': 'Zanima me',
+      'form.service.web': 'Spletno oblikovanje in razvoj',
+      'form.service.video': 'Kratki AI videi',
+      'form.service.translation': 'Prevajanje besedil',
+      'form.service.other': 'Nekaj drugega',
+      'form.message': 'Podrobnosti projekta',
+      'form.message.ph': 'Povejte mi nekaj o tem, kaj imate v mislih...',
+      'form.submit': 'Pošlji sporočilo',
+      'form.success': 'Hvala! Vaše sporočilo je na poti. Odgovoril vam bom v 24 urah.',
+      'footer.tagline': 'Spletne strani · AI Videi · Prevajanje',
+      'footer.rights': 'Vse pravice pridržane.'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    const dict = translations[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+
+    // Update gradient text data-attribute for glow effect
+    const gradientName = document.querySelector('h1 .gradient');
+    if (gradientName) gradientName.setAttribute('data-text', gradientName.textContent);
+
+    // Update toggle highlight
+    document.querySelectorAll('.lang-toggle span').forEach(s => {
+      s.classList.toggle('active', s.getAttribute('data-lang') === lang);
+    });
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLanguage(currentLang === 'en' ? 'sl' : 'en');
+  });
+
+  // ---------- Nav scroll effect ----------
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ---------- Mobile menu ----------
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ---------- Scroll reveal ----------
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ---------- Stagger card animation ----------
+  document.querySelectorAll('.services-grid .service-card, .why-grid .why-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  // ---------- Form ----------
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const success = document.getElementById('formSuccess');
+    success.classList.add('show');
+    form.reset();
+    setTimeout(() => success.classList.remove('show'), 6000);
+  });
+
+  // ---------- Year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Initialize
+  applyLanguage('en');
+</script>
+</body>
+</html>
