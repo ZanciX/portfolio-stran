@@ -1342,4 +1342,63 @@
 
   // ---------- Form ----------
   const contactForm = document.getElementById('contactForm');
-  contactForm.addEventListener('submit', as
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const status = document.getElementById('formSuccess');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const submitLabel = submitBtn.querySelector('span');
+      const originalLabel = submitLabel.textContent;
+      const dict = translations[currentLang] || translations.en;
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = dict['form.sending'] || 'Sending...';
+      status.classList.remove('show', 'error');
+
+      try {
+        if (!window.emailjs) throw new Error('EmailJS SDK failed to load');
+        await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
+        status.textContent = dict['form.success'];
+        status.classList.add('show');
+        form.reset();
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        status.textContent = dict['form.error'] || 'Something went wrong. Please try again.';
+        status.classList.add('show', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitLabel.textContent = originalLabel;
+        setTimeout(() => status.classList.remove('show'), 7000);
+      }
+    });
+  }
+
+  // ---------- Year ----------
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------- Initialize ----------
+  try {
+    applyLanguage('en');
+  } catch (err) {
+    console.error('applyLanguage init error:', err);
+  }
+
+  // ---------- Safety net ----------
+  // If anything above failed, force all .reveal blocks visible after a short delay
+  // so users always see content even if JS errors occur.
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 800);
+  window.addEventListener('error', () => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  });
+</script>
+</body>
+</html>
