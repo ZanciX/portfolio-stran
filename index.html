@@ -109,25 +109,33 @@
   }
 
   .logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     position: relative;
+    height: 40px;
+    line-height: 0;
   }
+  .logo svg {
+    height: 40px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .logo:hover svg { transform: translateY(-1px) scale(1.02); }
   .logo::after {
     content: '';
     position: absolute;
     inset: -4px;
     background: var(--gradient);
     filter: blur(20px);
-    opacity: 0.25;
+    opacity: 0.22;
     z-index: -1;
+    border-radius: 14px;
+    pointer-events: none;
+  }
+  @media (max-width: 720px) {
+    .logo, .logo svg { height: 34px; }
   }
 
   .nav-links {
@@ -835,7 +843,33 @@
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">NexCraft</a>
+    <a href="#" class="logo" aria-label="NexCraft Digital Agency">
+      <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" role="img">
+        <defs>
+          <linearGradient id="nexcraftLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+          </linearGradient>
+          <filter id="nexcraftLogoGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="400" height="150" fill="#0a0a0f" rx="12"/>
+        <g transform="translate(30, 25)">
+          <polygon points="50,0 93,25 93,75 50,100 7,75 7,25" fill="none" stroke="url(#nexcraftLogoGrad)" stroke-width="2" opacity="0.5"/>
+          <text x="50" y="73" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" text-anchor="middle" fill="url(#nexcraftLogoGrad)" filter="url(#nexcraftLogoGlow)">N</text>
+          <polygon points="78,8 84,22 91,15 83,30 89,24 79,40" fill="#00d4ff" opacity="0.9" filter="url(#nexcraftLogoGlow)"/>
+        </g>
+        <text x="148" y="72" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white" letter-spacing="1">Nex</text>
+        <text x="220" y="72" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="url(#nexcraftLogoGrad)" letter-spacing="1" filter="url(#nexcraftLogoGlow)">Craft</text>
+        <text x="148" y="96" font-family="Arial, sans-serif" font-size="11" fill="#666" letter-spacing="4">DIGITAL AGENCY</text>
+        <line x1="148" y1="80" x2="360" y2="80" stroke="url(#nexcraftLogoGrad)" stroke-width="0.5" opacity="0.3"/>
+      </svg>
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" data-i18n="nav.services">Services</a></li>
       <li><a href="#why" data-i18n="nav.why">Why Me</a></li>
