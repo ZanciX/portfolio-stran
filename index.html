@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
     --bg: #050509;
@@ -566,6 +567,12 @@
     flex-shrink: 0;
   }
   .contact-list .icon svg { width: 20px; height: 20px; }
+  .contact-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .contact-list li:hover .contact-link { color: var(--accent-blue); }
 
   form.contact-form {
     padding: 2.25rem;
@@ -620,6 +627,12 @@
     text-align: center;
   }
   .form-success.show { display: block; animation: fadeUp 0.4s ease; }
+  .form-success.error {
+    background: rgba(236, 72, 153, 0.1);
+    border-color: rgba(236, 72, 153, 0.3);
+    color: var(--accent-pink);
+  }
+  .btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
   /* Footer */
   footer {
@@ -857,6 +870,12 @@
         <ul class="contact-list">
           <li>
             <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <a href="mailto:info@nexcraft.org" class="contact-link">info@nexcraft.org</a>
+          </li>
+          <li>
+            <div class="icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <span data-i18n="contact.info.location">Europe</span>
@@ -865,6 +884,7 @@
       </div>
 
       <form class="contact-form reveal" id="contactForm" novalidate>
+        <input type="hidden" name="to_email" value="info@nexcraft.org" />
         <div class="form-row">
           <div class="field">
             <label for="name" data-i18n="form.name">Your name</label>
@@ -896,7 +916,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
 
-        <div class="form-success" id="formSuccess" data-i18n="form.success">Thanks! Your message is on its way. I'll be in touch within 24 hours.</div>
+        <div class="form-success" id="formSuccess" data-i18n="form.success">Message sent! We'll get back to you within 24 hours.</div>
       </form>
     </div>
   </div>
@@ -975,7 +995,9 @@
       'form.message': 'Project details',
       'form.message.ph': 'Tell me a bit about what you have in mind...',
       'form.submit': 'Send message',
-      'form.success': "Thanks! Your message is on its way. I'll be in touch within 24 hours.",
+      'form.sending': 'Sending...',
+      'form.success': "Message sent! We'll get back to you within 24 hours.",
+      'form.error': 'Something went wrong. Please try again or email info@nexcraft.org.',
       'footer.tagline': 'Web Design · AI Videos · Translation',
       'footer.rights': 'All rights reserved.'
     },
@@ -1040,7 +1062,9 @@
       'form.message': 'Podrobnosti projekta',
       'form.message.ph': 'Povejte mi nekaj o tem, kaj imate v mislih...',
       'form.submit': 'Pošlji sporočilo',
-      'form.success': 'Hvala! Vaše sporočilo je na poti. Odgovoril vam bom v 24 urah.',
+      'form.sending': 'Pošiljanje...',
+      'form.success': 'Sporočilo poslano! Odgovorili vam bomo v 24 urah.',
+      'form.error': 'Prišlo je do napake. Poskusite znova ali pišite na info@nexcraft.org.',
       'footer.tagline': 'Spletne strani · AI Videi · Prevajanje',
       'footer.rights': 'Vse pravice pridržane.'
     }
@@ -1104,18 +1128,50 @@
     card.style.transitionDelay = (i * 0.08) + 's';
   });
 
+  // ---------- EmailJS ----------
+  const EMAILJS_PUBLIC_KEY = 'O7cCoB6ewCJtjaHJs';
+  const EMAILJS_SERVICE_ID = 'service_wtmsevl';
+  const EMAILJS_TEMPLATE_ID = 'template_hz47xuk';
+
+  if (window.emailjs && emailjs.init) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
   // ---------- Form ----------
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    const success = document.getElementById('formSuccess');
-    success.classList.add('show');
-    form.reset();
-    setTimeout(() => success.classList.remove('show'), 6000);
+
+    const status = document.getElementById('formSuccess');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitLabel = submitBtn.querySelector('span');
+    const originalLabel = submitLabel.textContent;
+    const dict = translations[currentLang];
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = dict['form.sending'] || 'Sending...';
+    status.classList.remove('show', 'error');
+
+    try {
+      if (!window.emailjs) throw new Error('EmailJS SDK failed to load');
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
+      status.textContent = dict['form.success'];
+      status.classList.add('show');
+      form.reset();
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      status.textContent = dict['form.error'] || 'Something went wrong. Please try again.';
+      status.classList.add('show', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = originalLabel;
+      setTimeout(() => status.classList.remove('show'), 7000);
+    }
   });
 
   // ---------- Year ----------
@@ -1126,4 +1182,4 @@
 </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                 
