@@ -608,6 +608,39 @@
     outline: none;
   }
   .field textarea { resize: vertical; min-height: 120px; }
+  .field select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    color-scheme: dark;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 14px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .field select:hover { border-color: rgba(0, 212, 255, 0.3); }
+  .field select:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-color: rgba(0, 212, 255, 0.05);
+  }
+  .field select option {
+    background-color: #0a0a14;
+    color: var(--text);
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+  }
+  .field select option:checked {
+    background: rgba(0, 212, 255, 0.18);
+    color: var(--accent-blue);
+  }
+  .field select option:hover,
+  .field select option:focus {
+    background: rgba(168, 85, 247, 0.18);
+    color: var(--text);
+  }
   .field input:focus, .field textarea:focus, .field select:focus {
     border-color: var(--accent-blue);
     background: rgba(0, 212, 255, 0.05);
@@ -1309,46 +1342,4 @@
 
   // ---------- Form ----------
   const contactForm = document.getElementById('contactForm');
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const status = document.getElementById('formSuccess');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const submitLabel = submitBtn.querySelector('span');
-    const originalLabel = submitLabel.textContent;
-    const dict = translations[currentLang];
-
-    submitBtn.disabled = true;
-    submitLabel.textContent = dict['form.sending'] || 'Sending...';
-    status.classList.remove('show', 'error');
-
-    try {
-      if (!window.emailjs) throw new Error('EmailJS SDK failed to load');
-      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
-      status.textContent = dict['form.success'];
-      status.classList.add('show');
-      form.reset();
-    } catch (err) {
-      console.error('EmailJS error:', err);
-      status.textContent = dict['form.error'] || 'Something went wrong. Please try again.';
-      status.classList.add('show', 'error');
-    } finally {
-      submitBtn.disabled = false;
-      submitLabel.textContent = originalLabel;
-      setTimeout(() => status.classList.remove('show'), 7000);
-    }
-  });
-
-  // ---------- Year ----------
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Initialize
-  applyLanguage('en');
-</script>
-</body>
-</html>
+  contactForm.addEventListener('submit', as
