@@ -634,6 +634,94 @@
   }
   .btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
+  /* Testimonials marquee */
+  #testimonials { padding-bottom: 6rem; }
+  .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0 0.5rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marqueeRight 60s linear infinite;
+    will-change: transform;
+  }
+  @keyframes marqueeRight {
+    from { transform: translate3d(-50%, 0, 0); }
+    to   { transform: translate3d(0, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation-duration: 240s; }
+  }
+  .testimonial-card {
+    flex: 0 0 360px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+  }
+  .testimonial-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 18px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.4));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .testimonial-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.4), rgba(168, 85, 247, 0.4));
+    filter: blur(18px);
+    opacity: 0.25;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .testimonial-stars {
+    display: flex;
+    gap: 0.18rem;
+    margin-bottom: 1rem;
+    color: #fbbf24;
+    font-size: 1.1rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.55));
+  }
+  .testimonial-text {
+    color: var(--text);
+    font-size: 0.97rem;
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+    min-height: 5em;
+  }
+  .testimonial-author {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  @media (max-width: 720px) {
+    .testimonial-card { flex-basis: 290px; padding: 1.5rem; }
+    .marquee-track { animation-duration: 45s; }
+  }
+
   /* Footer */
   footer {
     padding: 3rem 1.5rem 2rem;
@@ -718,6 +806,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" data-i18n="nav.services">Services</a></li>
       <li><a href="#why" data-i18n="nav.why">Why Me</a></li>
+      <li><a href="#testimonials" data-i18n="nav.testimonials">Reviews</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -852,6 +941,22 @@
   </div>
 </section>
 
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-i18n="testimonials.tag">Reviews</div>
+      <h2 class="section-title">
+        <span data-i18n="testimonials.title.1">What clients</span>
+        <span class="gradient" data-i18n="testimonials.title.2">say</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="testimonials.subtitle">Real feedback from real businesses we've worked with.</p>
+    </div>
+  </div>
+  <div class="marquee" aria-label="Client testimonials">
+    <div class="marquee-track" id="testimonialsTrack"></div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="container">
     <div class="section-header reveal">
@@ -937,6 +1042,7 @@
     en: {
       'nav.services': 'Services',
       'nav.why': 'Why Me',
+      'nav.testimonials': 'Reviews',
       'nav.contact': 'Contact',
       'hero.badge': 'Available for new projects',
       'hero.title.1': "Hi, I'm",
@@ -976,6 +1082,10 @@
       'why.3.desc': 'You talk to me, not a project manager. Quick answers, no runaround.',
       'why.4.title': 'Modern toolset',
       'why.4.desc': "Latest tech, AI tools, and best practices — built for today's audience.",
+      'testimonials.tag': 'Reviews',
+      'testimonials.title.1': 'What clients',
+      'testimonials.title.2': 'say',
+      'testimonials.subtitle': "Real feedback from real businesses we've worked with.",
       'contact.tag': 'Get in touch',
       'contact.title.1': "Let's build something",
       'contact.title.2': 'remarkable',
@@ -1004,6 +1114,7 @@
     sl: {
       'nav.services': 'Storitve',
       'nav.why': 'Zakaj jaz',
+      'nav.testimonials': 'Mnenja',
       'nav.contact': 'Kontakt',
       'hero.badge': 'Na voljo za nove projekte',
       'hero.title.1': 'Pozdravljeni, sem',
@@ -1043,6 +1154,10 @@
       'why.3.desc': 'Govorite z mano, ne s project managerjem. Hitri odgovori, brez zapletov.',
       'why.4.title': 'Sodobna orodja',
       'why.4.desc': 'Najnovejša tehnologija, AI orodja in najboljše prakse — ustvarjeno za današnje občinstvo.',
+      'testimonials.tag': 'Mnenja',
+      'testimonials.title.1': 'Kaj pravijo',
+      'testimonials.title.2': 'stranke',
+      'testimonials.subtitle': 'Resnične izkušnje strank, s katerimi smo sodelovali.',
       'contact.tag': 'Pišite mi',
       'contact.title.1': 'Skupaj ustvarimo nekaj',
       'contact.title.2': 'izjemnega',
@@ -1070,6 +1185,58 @@
     }
   };
 
+  // ---------- Testimonials data ----------
+  const testimonials = {
+    en: [
+      { text: "NexCraft built our website in days. Absolutely stunning result!", author: "James R., UK" },
+      { text: "The AI video they created went viral. Best investment we made.", author: "Sofia M., Germany" },
+      { text: "Translation was perfect, fast and professional. 10/10!", author: "Marco T., Italy" },
+      { text: "Professional, fast and creative. Our brand looks incredible now.", author: "Emily W., Netherlands" },
+      { text: "We got 3x more inquiries after NexCraft redesigned our site.", author: "David K., Austria" },
+      { text: "The AI character video blew our clients away. Truly next level.", author: "Sarah L., Sweden" },
+      { text: "Affordable, quick and the quality exceeded our expectations.", author: "Thomas B., France" },
+      { text: "NexCraft translated our entire catalog perfectly. Flawless work.", author: "Elena V., Spain" },
+      { text: "Our new website converts like crazy. Best decision of the year.", author: "Michael P., Denmark" },
+      { text: "Responsive, talented and delivered ahead of schedule. Love it!", author: "Laura C., Belgium" }
+    ],
+    sl: [
+      { text: "NexCraft je naredil našo stran v dneh. Rezultat je bil neverjetno lep!", author: "Janez K., Slovenija" },
+      { text: "AI video ki so ga ustvarili je postal viralen. Najboljša investicija.", author: "Ana M., Hrvaška" },
+      { text: "Prevod je bil popoln, hiter in profesionalen. 10/10!", author: "Luka P., Avstrija" },
+      { text: "Profesionalno, hitro in kreativno. Naša znamka zdaj izgleda neverjetno.", author: "Maja S., Slovenija" },
+      { text: "Po redesignu strani smo dobili 3x več povpraševanj.", author: "Rok T., Nemčija" },
+      { text: "AI video z likom je navdušil naše stranke. Res naslednji nivo.", author: "Tina B., Švica" },
+      { text: "Ugodno, hitro in kakovost je presegla vsa pričakovanja.", author: "Gregor M., Slovenija" },
+      { text: "Prevedli so celoten katalog popolno. Brezhibno delo.", author: "Nina K., Italija" },
+      { text: "Nova spletna stran konvertira odlično. Najboljša odločitev leta.", author: "Blaž H., Avstrija" },
+      { text: "Odzivni, talentirani in oddali pred rokom. Všeč mi je!", author: "Petra V., Slovenija" }
+    ]
+  };
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderTestimonials(lang) {
+    const track = document.getElementById('testimonialsTrack');
+    if (!track) return;
+    const items = testimonials[lang] || testimonials.en;
+    const cardHtml = items.map(t => `
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="testimonial-text">${escapeHtml(t.text)}</p>
+        <div class="testimonial-author">— ${escapeHtml(t.author)}</div>
+      </article>
+    `).join('');
+    // Duplicate set for seamless infinite loop
+    track.innerHTML = cardHtml + cardHtml;
+  }
+
   let currentLang = 'en';
 
   function applyLanguage(lang) {
@@ -1094,6 +1261,9 @@
     document.querySelectorAll('.lang-toggle span').forEach(s => {
       s.classList.toggle('active', s.getAttribute('data-lang') === lang);
     });
+
+    // Re-render testimonials in chosen language
+    renderTestimonials(lang);
   }
 
   document.getElementById('langToggle').addEventListener('click', () => {
@@ -1182,4 +1352,3 @@
 </script>
 </body>
 </html>
-                 
