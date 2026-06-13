@@ -6,10 +6,10 @@
 <meta name="description" content="Professional AI videos for ads, social media and brand promotion. Fast, affordable, effective. Created by NexCraft.">
 <title>AI Video Production | NexCraft</title>
 <link rel="canonical" href="https://nexcraft.org/ai-video.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,2 93,26 93,74 50,98 7,74 7,26' fill='%23111' stroke='%236366f1' stroke-width='4'/><text y='.9em' font-size='60' x='50%25' text-anchor='middle' dominant-baseline='middle' dy='0.1em' fill='url(%23g)' font-weight='bold' font-family='Arial'>N</text><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2306b6d4'/><stop offset='100%25' stop-color='%238b5cf6'/></linearGradient></defs></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --bg: #050509;
@@ -1054,7 +1054,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   .testimonial-card { flex-basis: 290px; padding: 1.5rem; }
   .marquee-track { animation-duration: 45s; }
 }
-
 </style>
 </head>
 <body>
@@ -1113,7 +1112,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     <p class="tagline" data-i18n="video.hero.tagline">Scroll-stopping videos created with AI. Fast, affordable, effective.</p>
   </div>
 </header>
-
 <section>
   <div class="container">
     <div class="section-header reveal">
@@ -1126,7 +1124,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     <div class="problem-block reveal" data-i18n="video.solve.body">Video content is the #1 driver of engagement online &mdash; but traditional video production is slow and expensive. We create professional AI videos in days, not weeks.</div>
   </div>
 </section>
-
 <section>
   <div class="container">
     <div class="section-header reveal">
@@ -1161,7 +1158,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </section>
-
 <section>
   <div class="container">
     <div class="section-header reveal">
@@ -1178,7 +1174,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </section>
-
 <section>
   <div class="container">
     <div class="section-header reveal">
@@ -1196,7 +1191,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </section>
-
 <section class="cta-section reveal">
   <h2 data-i18n="video.cta.title">Need a video for your brand?</h2>
   <a href="/#contact" class="btn btn-primary">
@@ -1541,9 +1535,7 @@ const translations = {
     "video.cta.btn": "Kontaktirajte nas"
   }
 };
-
   let currentLang = 'en';
-
   function applyLanguage(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
@@ -1563,18 +1555,15 @@ const translations = {
     });
     if (typeof renderTestimonials === 'function') renderTestimonials(lang);
   }
-
   const langToggleEl = document.getElementById('langToggle');
   if (langToggleEl) langToggleEl.addEventListener('click', () => {
     applyLanguage(currentLang === 'en' ? 'sl' : 'en');
   });
-
   // ---------- Nav scroll effect ----------
   const navEl = document.getElementById('nav');
   if (navEl) window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 30);
   });
-
   // ---------- Mobile menu ----------
   const menuToggle = document.getElementById('menuToggle');
   const navLinksEl = document.getElementById('navLinks');
@@ -1582,7 +1571,6 @@ const translations = {
     menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
     navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
   }
-
   // ---------- Scroll reveal ----------
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1593,23 +1581,19 @@ const translations = {
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
   // ---------- Stagger card animation ----------
   document.querySelectorAll('.services-grid > .reveal, .steps-grid > .reveal, .features-grid > .reveal, .process-steps > .reveal, .use-cases-grid > .reveal, .video-placeholders > .reveal').forEach((card, i) => {
     card.style.transitionDelay = (i * 0.08) + 's';
   });
-
   // ---------- Year ----------
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
   // ---------- Initialize ----------
   try {
     applyLanguage('en');
   } catch (err) {
     console.error('applyLanguage init error:', err);
   }
-
   // ---------- Safety net: force reveal everything if anything goes wrong ----------
   setTimeout(() => {
     document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
@@ -1617,7 +1601,6 @@ const translations = {
   window.addEventListener('error', () => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   });
-
 </script>
 </body>
 </html>

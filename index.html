@@ -10,6 +10,7 @@
 <meta property="og:url" content="https://nexcraft.org">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nexcraft.org">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,2 93,26 93,74 50,98 7,74 7,26' fill='%23111' stroke='%236366f1' stroke-width='4'/><text y='.9em' font-size='60' x='50%25' text-anchor='middle' dominant-baseline='middle' dy='0.1em' fill='url(%23g)' font-weight='bold' font-family='Arial'>N</text><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2306b6d4'/><stop offset='100%25' stop-color='%238b5cf6'/></linearGradient></defs></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -1058,8 +1059,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   .testimonial-card { flex-basis: 290px; padding: 1.5rem; }
   .marquee-track { animation-duration: 45s; }
 }
-
-
 .hero-logo {
   width: 250px;
   height: 250px;
@@ -1183,7 +1182,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </header>
-
 <section id="services">
   <div class="container">
     <div class="section-header reveal">
@@ -1208,7 +1206,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </article>
-
       <article class="service-card reveal">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1222,7 +1219,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </article>
-
       <article class="service-card reveal">
         <div class="service-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1239,7 +1235,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </section>
-
 <section id="how-we-work">
   <div class="container">
     <div class="section-header reveal">
@@ -1274,7 +1269,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </section>
-
 <section id="reviews">
   <div class="container">
     <div class="section-header reveal">
@@ -1290,7 +1284,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     <div class="marquee-track" id="testimonialsTrack"></div>
   </div>
 </section>
-
 <section id="contact">
   <div class="container">
     <div class="section-header reveal">
@@ -1691,7 +1684,6 @@ const translations = {
     "video.cta.btn": "Kontaktirajte nas"
   }
 };
-
 const testimonials = {
   "en": [
     {
@@ -1778,7 +1770,6 @@ const testimonials = {
     }
   ]
 };
-
   function escapeHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   }
@@ -1795,9 +1786,7 @@ const testimonials = {
     `).join('');
     track.innerHTML = html + html;
   }
-
   let currentLang = 'en';
-
   function applyLanguage(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
@@ -1817,12 +1806,10 @@ const testimonials = {
     });
     if (typeof renderTestimonials === 'function') renderTestimonials(lang);
   }
-
   const langToggleEl = document.getElementById('langToggle');
   if (langToggleEl) langToggleEl.addEventListener('click', () => {
     applyLanguage(currentLang === 'en' ? 'sl' : 'en');
   });
-
   const EMAILJS_PUBLIC_KEY = 'O7cCoB6ewCJtjaHJs';
   const EMAILJS_SERVICE_ID = 'service_wtmsevl';
   const EMAILJS_TEMPLATE_ID = 'template_hz47xuk';
@@ -1860,13 +1847,11 @@ const testimonials = {
       }
     });
   }
-
   // ---------- Nav scroll effect ----------
   const navEl = document.getElementById('nav');
   if (navEl) window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 30);
   });
-
   // ---------- Mobile menu ----------
   const menuToggle = document.getElementById('menuToggle');
   const navLinksEl = document.getElementById('navLinks');
@@ -1874,7 +1859,6 @@ const testimonials = {
     menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
     navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
   }
-
   // ---------- Scroll reveal ----------
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1885,23 +1869,19 @@ const testimonials = {
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
   // ---------- Stagger card animation ----------
   document.querySelectorAll('.services-grid > .reveal, .steps-grid > .reveal, .features-grid > .reveal, .process-steps > .reveal, .use-cases-grid > .reveal, .video-placeholders > .reveal').forEach((card, i) => {
     card.style.transitionDelay = (i * 0.08) + 's';
   });
-
   // ---------- Year ----------
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
   // ---------- Initialize ----------
   try {
     applyLanguage('en');
   } catch (err) {
     console.error('applyLanguage init error:', err);
   }
-
   // ---------- Safety net: force reveal everything if anything goes wrong ----------
   setTimeout(() => {
     document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
@@ -1909,7 +1889,6 @@ const testimonials = {
   window.addEventListener('error', () => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   });
-
 </script>
 </body>
 </html>
