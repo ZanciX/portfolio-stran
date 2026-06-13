@@ -1054,6 +1054,40 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   .marquee-track { animation-duration: 45s; }
 }
 
+
+.hero-logo {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 2rem;
+  perspective: 1000px;
+  animation: heroLogoFloat 3s ease-in-out infinite alternate;
+  position: relative;
+}
+.hero-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-style: preserve-3d;
+  animation: heroLogoSpin 8s linear infinite, heroLogoGlow 2.5s ease-in-out infinite alternate;
+}
+@keyframes heroLogoSpin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+@keyframes heroLogoFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14px); }
+}
+@keyframes heroLogoGlow {
+  0%   { filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.4)) drop-shadow(0 0 28px rgba(168, 85, 247, 0.3)); }
+  100% { filter: drop-shadow(0 0 32px rgba(0, 212, 255, 0.85)) drop-shadow(0 0 52px rgba(168, 85, 247, 0.7)); }
+}
+@media (max-width: 720px) {
+  .hero-logo { width: 150px; height: 150px; margin-bottom: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo, .hero-logo svg { animation: none; }
+}
 </style>
 </head>
 <body>
@@ -1108,6 +1142,25 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     <div class="badge">
       <span class="dot"></span>
       <span data-i18n="hero.badge">AI-powered digital agency</span>
+    </div>
+    <div class="hero-logo" aria-hidden="true">
+      <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heroLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00d4ff"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+          </linearGradient>
+          <filter id="heroLogoBlur">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g transform="translate(25, 25)">
+          <polygon points="50,0 93,25 93,75 50,100 7,75 7,25" fill="none" stroke="url(#heroLogoGrad)" stroke-width="2.5" opacity="0.65"/>
+          <text x="50" y="73" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" text-anchor="middle" fill="url(#heroLogoGrad)" filter="url(#heroLogoBlur)">N</text>
+          <polygon points="78,8 84,22 91,15 83,30 89,24 79,40" fill="#00d4ff" opacity="0.9" filter="url(#heroLogoBlur)"/>
+        </g>
+      </svg>
     </div>
     <h1>
       <span data-i18n="index.hero.title">We Build the Digital Future</span><br>
