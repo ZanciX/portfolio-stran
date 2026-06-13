@@ -1060,7 +1060,7 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
 <div class="grid-bg"></div>
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo" aria-label="NexCraft home">
+    <a href="/" class="logo" aria-label="NexCraft home">
       <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" role="img">
         <defs>
           <linearGradient id="nexcraftLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1086,14 +1086,21 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
         <line x1="148" y1="80" x2="360" y2="80" stroke="url(#nexcraftLogoGrad)" stroke-width="0.5" opacity="0.3"/>
       </svg>
     </a>
-    <a href="index.html" class="back-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      <span data-i18n="nav.back">Back</span>
-    </a>
-    <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-      <span class="active" data-lang="en">EN</span>
-      <span data-lang="sl">SL</span>
-    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="/#how-we-work" data-i18n="nav.how">How We Work</a></li>
+      <li><a href="/#reviews" data-i18n="nav.testimonials">Reviews</a></li>
+      <li><a href="/#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+        <span class="active" data-lang="en">EN</span>
+        <span data-lang="sl">SL</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 <header class="hero sub">
@@ -1183,7 +1190,7 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
 
 <section class="cta-section reveal">
   <h2 data-i18n="ai.cta.title">Want an AI agent for your business?</h2>
-  <a href="index.html#contact" class="btn btn-primary">
+  <a href="/#contact" class="btn btn-primary">
     <span data-i18n="ai.cta.btn">Contact Us</span>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
