@@ -1054,6 +1054,47 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   .testimonial-card { flex-basis: 290px; padding: 1.5rem; }
   .marquee-track { animation-duration: 45s; }
 }
+
+.demo-widget-wrap {
+  max-width: 760px;
+  margin: 3rem auto 0;
+  padding: 2.25rem 2rem 2rem;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.06), rgba(0, 212, 255, 0.06));
+  border: 1px solid var(--border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  backdrop-filter: blur(15px);
+  overflow: visible;
+}
+.demo-widget-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 22px;
+  background: var(--gradient);
+  filter: blur(40px);
+  opacity: 0.20;
+  z-index: -1;
+  pointer-events: none;
+}
+.demo-widget-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  text-shadow: 0 0 14px rgba(0, 212, 255, 0.45);
+  margin-bottom: 1.25rem;
+}
+.demo-widget-wrap elevenlabs-convai {
+  width: 100%;
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -1177,10 +1218,11 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
         <span class="gradient" data-i18n="ai.demo.title.2">demo</span>
       </h2>
     </div>
-    <div class="demo-box reveal">
-      <h4 data-i18n="ai.demo.box.title">Live demo coming soon</h4>
-      <p data-i18n="ai.demo.box.body">AI agent demo coming soon.</p>
+    <div class="demo-widget-wrap reveal">
+      <div class="demo-widget-label" data-i18n="ai.demo.label">Live AI agent</div>
+      <elevenlabs-convai agent-id="agent_1901kv0rae95fa79rpvx9352r3tp"></elevenlabs-convai>
     </div>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </div>
 </section>
 <section class="cta-section reveal">
@@ -1328,6 +1370,7 @@ const translations = {
     "ai.demo.title.2": "demo",
     "ai.demo.box.title": "Live demo coming soon",
     "ai.demo.box.body": "AI agent demo coming soon.",
+    "ai.demo.label": "Live AI agent",
     "ai.cta.title": "Want an AI agent for your business?",
     "ai.cta.btn": "Contact Us",
     "video.hero.title.1": "AI Video",
@@ -1491,6 +1534,7 @@ const translations = {
     "ai.demo.title.2": "demo",
     "ai.demo.box.title": "Demo kmalu na voljo",
     "ai.demo.box.body": "Demo AI agenta kmalu na voljo.",
+    "ai.demo.label": "AI agent v živo",
     "ai.cta.title": "Želite AI agenta za vaše podjetje?",
     "ai.cta.btn": "Kontaktirajte nas",
     "video.hero.title.1": "AI video",
