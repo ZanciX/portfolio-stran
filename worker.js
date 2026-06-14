@@ -1,12 +1,13 @@
 // NexCraft Anthropic API proxy — Cloudflare Worker
 //
-// Deploy: `wrangler deploy` (uses the bundled wrangler.toml below)
-// Secret: `wrangler secret put ANTHROPIC_KEY`   (paste the sk-ant-... key when prompted)
+// Deploy: `wrangler deploy`
+// Secret: `wrangler secret put ANTHROPIC_KEY`
 // Route:  attach this worker to nexcraft.org/api/chat in the Cloudflare dashboard
 //         (Workers & Pages → your worker → Triggers → Add Route)
 //
-// The widget on nexcraft.org POSTs the same JSON body it would have sent to Anthropic
-// directly. We forward it, attach the API key from env, and return the response.
+// Fully transparent body pass-through: the request body bytes are forwarded to
+// Anthropic verbatim, the upstream response is returned to the caller verbatim.
+// The only thing this worker adds is the API key header (server-side) and CORS.
 
 const ALLOWED_ORIGINS = new Set([
   'https://nexcraft.org',
@@ -25,13 +26,6 @@ function corsHeaders(origin) {
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin',
   };
-}
-
-function json(status, payload, cors) {
-  return new Response(JSON.stringify(payload), {
-    status,
-    headers: { ...cors, 'Content-Type': 'application/json' },
-  });
 }
 
 export default {
@@ -58,33 +52,37 @@ export default {
     }
 
     if (!env.ANTHROPIC_KEY) {
-      return json(500, { error: 'Server is missing ANTHROPIC_KEY' }, cors);
+      return new Response(
+        JSON.stringify({ error: 'Server is missing ANTHROPIC_KEY' }),
+        { status: 500, headers: { ...cors, 'Content-Type': 'application/json' } }
+      );
     }
 
-    let body;
-    try {
-      body = await request.json();
-    } catch (e) {
-      return json(400, { error: 'Invalid JSON body' }, cors);
-    }
+    // Read the raw body — no JSON parsing, no validation, no shape checks.
+    // Whatever the client sent goes straight to Anthropic.
+    const rawBody = await request.text();
 
     let upstream;
     try {
       upstream = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': request.headers.get('Content-Type') || 'application/json',
           'x-api-key': env.ANTHROPIC_KEY,
           'anthropic-version': '2023-06-01',
         },
-        body: JSON.stringify(body),
+        body: rawBody,
       });
     } catch (e) {
-      return json(502, { error: 'Upstream request failed' }, cors);
+      return new Response(
+        JSON.stringify({ error: 'Upstream request failed', detail: String(e) }),
+        { status: 502, headers: { ...cors, 'Content-Type': 'application/json' } }
+      );
     }
 
-    const text = await upstream.text();
-    return new Response(text, {
+    // Forward upstream response verbatim (status code, body, content-type).
+    const upstreamBody = await upstream.text();
+    return new Response(upstreamBody, {
       status: upstream.status,
       headers: {
         ...cors,
