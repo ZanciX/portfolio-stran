@@ -1199,10 +1199,10 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
           </svg>
         </div>
-        <h3 data-i18n="services.web.title">Web Design &amp; Development</h3>
+        <h3 data-i18n="services.web.title" data-en="Web Design &amp; Development" data-sl="Spletni dizajn in razvoj">Web Design &amp; Development</h3>
         <p data-i18n="services.web.desc">Modern, fast, professional websites built with AI. From idea to live site.</p>
         <a class="card-link" href="web-design.html">
-          <span data-i18n="services.web.cta">Learn more</span>
+          <span data-i18n="services.web.cta" data-en="Learn more" data-sl="Več">Learn more</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </article>
@@ -1212,10 +1212,10 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
             <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/>
           </svg>
         </div>
-        <h3 data-i18n="services.ai.title">AI Agents</h3>
+        <h3 data-i18n="services.ai.title" data-en="AI Agents" data-sl="AI Agenti">AI Agents</h3>
         <p data-i18n="services.ai.desc">Smart chatbots and voice agents for your website. Automate support, sales and bookings 24/7.</p>
         <a class="card-link" href="ai-agenti.html">
-          <span data-i18n="services.ai.cta">Learn more</span>
+          <span data-i18n="services.ai.cta" data-en="Learn more" data-sl="Več">Learn more</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </article>
@@ -1225,10 +1225,10 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
             <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
           </svg>
         </div>
-        <h3 data-i18n="services.video.title">AI Video</h3>
+        <h3 data-i18n="services.video.title" data-en="AI Video" data-sl="AI Video">AI Video</h3>
         <p data-i18n="services.video.desc">Eye-catching AI videos for ads, social media and brand promotion.</p>
         <a class="card-link" href="ai-video.html">
-          <span data-i18n="services.video.cta">Learn more</span>
+          <span data-i18n="services.video.cta" data-en="Learn more" data-sl="Več">Learn more</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </article>
@@ -1536,7 +1536,7 @@ const translations = {
     "services.title.1": "Tri storitve, ki",
     "services.title.2": "prinašajo rezultate",
     "services.subtitle": "Vsaka je zasnovana, da vaše podjetje izstopa in hitro raste.",
-    "services.web.title": "Web Design & Development",
+    "services.web.title": "Spletni dizajn in razvoj",
     "services.web.desc": "Moderne, hitre, profesionalne spletne strani, zgrajene z AI. Od ideje do žive strani.",
     "services.web.cta": "Več",
     "services.ai.title": "AI Agenti",
@@ -1800,6 +1800,11 @@ const testimonials = {
       const key = el.getAttribute('data-i18n-placeholder');
       if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
     });
+    // Inline per-element overrides via data-en / data-sl
+    document.querySelectorAll('[data-en], [data-sl]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.textContent = val;
+    });
     document.querySelectorAll('h1 .gradient').forEach(el => el.setAttribute('data-text', el.textContent));
     document.querySelectorAll('.lang-toggle span').forEach(s => {
       s.classList.toggle('active', s.getAttribute('data-lang') === lang);
@@ -1890,7 +1895,5 @@ const testimonials = {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   });
 </script>
-<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-<elevenlabs-convai agent-id="agent_1901kv0rae95fa79rpvx9352r3tp"></elevenlabs-convai>
 </body>
 </html>
