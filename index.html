@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
   --bg: #050509;
@@ -2111,6 +2112,14 @@ const testimonials = {
 
   // ---------- Booking ----------
   const BK_WORKER = 'https://nexcraft-chat-proxy.nexcraft.workers.dev';
+  const BK_EMAILJS_PUBLIC_KEY = 'O7cCoB6ewCJtjaHJs';
+  const BK_EMAILJS_SERVICE_ID = 'service_wtmsevl';
+  const BK_EMAILJS_OWNER_TEMPLATE  = 'template_booking_owner';
+  const BK_EMAILJS_CLIENT_TEMPLATE = 'template_booking_client';
+  if (window.emailjs && typeof emailjs.init === 'function') {
+    try { emailjs.init({ publicKey: BK_EMAILJS_PUBLIC_KEY }); }
+    catch (e) { console.error('EmailJS init failed:', e); }
+  }
   const BK_SLOTS = ['17:00','18:00','19:00','20:00','21:00','22:00'];
   const BK_DOW = {
     en: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
@@ -2262,6 +2271,36 @@ const testimonials = {
         const e = await r.json().catch(() => ({}));
         throw new Error(e.error || ('HTTP ' + r.status));
       }
+
+      // Booking is in KV — fire owner + client notification emails (best-effort)
+      if (window.emailjs && typeof emailjs.send === 'function') {
+        const ownerParams = {
+          booking_name:    payload.name,
+          booking_email:   payload.email,
+          booking_company: payload.company || '',
+          booking_date:    payload.date,
+          booking_time:    payload.time,
+          booking_message: payload.message
+        };
+        const clientParams = {
+          booking_name:  payload.name,
+          booking_email: payload.email,
+          booking_date:  payload.date,
+          booking_time:  payload.time
+        };
+        try {
+          await Promise.all([
+            emailjs.send(BK_EMAILJS_SERVICE_ID, BK_EMAILJS_OWNER_TEMPLATE,  ownerParams),
+            emailjs.send(BK_EMAILJS_SERVICE_ID, BK_EMAILJS_CLIENT_TEMPLATE, clientParams)
+          ]);
+        } catch (mailErr) {
+          console.error('Booking email notification failed:', mailErr);
+          // Booking is saved; the user-visible success stays.
+        }
+      } else {
+        console.warn('EmailJS unavailable; booking saved without notifications.');
+      }
+
       status.textContent = dict['booking.success'];
       status.classList.add('show');
       form.reset();
