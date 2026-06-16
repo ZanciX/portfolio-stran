@@ -1123,6 +1123,192 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   max-width: 720px;
   margin: 0 auto;
 }
+/* ---------- Booking section ---------- */
+#booking { padding-bottom: 5rem; }
+.booking-wrap {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+.booking-calendar, .booking-slots-panel {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  position: relative;
+}
+.booking-calendar::after, .booking-slots-panel::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  background: var(--gradient);
+  filter: blur(28px);
+  opacity: 0.10;
+  z-index: -1;
+  pointer-events: none;
+}
+.booking-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.booking-cal-header button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.booking-cal-header button:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--glow-blue);
+  background: var(--surface-2);
+}
+#bk-monthlabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.booking-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.booking-cal-grid .dow {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.4rem 0;
+  text-transform: uppercase;
+}
+.booking-cal-grid button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.55rem 0;
+  color: var(--text-muted);
+  cursor: default;
+  font-family: inherit;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+.booking-cal-grid button.bookable {
+  color: var(--text);
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.22);
+  cursor: pointer;
+}
+.booking-cal-grid button.bookable:hover {
+  background: rgba(0, 212, 255, 0.18);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.25);
+  transform: translateY(-1px);
+}
+.booking-cal-grid button.selected {
+  background: var(--gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.55);
+  transform: translateY(-1px);
+}
+.booking-slots-panel h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  min-height: 1.5em;
+}
+.booking-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
+}
+.booking-slots-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.booking-slot {
+  padding: 0.9rem 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.booking-slot strong {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.booking-slot small {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.booking-slot:hover:not(.taken):not(.selected) {
+  border-color: var(--border-hover);
+  box-shadow: var(--glow-blue);
+  transform: translateY(-2px);
+}
+.booking-slot.selected {
+  background: var(--gradient);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 8px 28px rgba(168, 85, 247, 0.4);
+}
+.booking-slot.selected small { color: rgba(255,255,255,0.85); }
+.booking-slot.taken {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: rgba(255,255,255,0.02);
+}
+.booking-slot.taken strong { color: var(--text-muted); }
+.booking-form-wrap {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  display: none;
+}
+.booking-form-wrap.show { display: block; animation: fadeUp 0.4s ease; }
+.bk-summary {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(168,85,247,0.10));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.bk-summary strong { color: var(--accent-blue); }
+@media (max-width: 760px) {
+  .booking-wrap { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1219,6 +1405,61 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   </div>
 </section>
 
+<section id="booking">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-i18n="booking.tag">Schedule</div>
+      <h2 class="section-title">
+        <span data-i18n="booking.title.1">Book a</span>
+        <span class="gradient" data-i18n="booking.title.2">Meeting</span>
+      </h2>
+      <p class="section-subtitle" data-i18n="booking.subtitle">Wednesdays &amp; Saturdays, 17:00&ndash;22:00. Pick a date and time below.</p>
+    </div>
+    <div class="booking-wrap reveal">
+      <div class="booking-calendar">
+        <div class="booking-cal-header">
+          <button type="button" id="bk-prev" aria-label="Previous month">&lsaquo;</button>
+          <div id="bk-monthlabel"></div>
+          <button type="button" id="bk-next" aria-label="Next month">&rsaquo;</button>
+        </div>
+        <div class="booking-cal-grid" id="bk-cal-grid"></div>
+      </div>
+      <div class="booking-slots-panel">
+        <h4 id="bk-slots-title" data-i18n="booking.pickdate">Pick a Wednesday or Saturday from the calendar.</h4>
+        <div class="booking-slots" id="bk-slots"></div>
+      </div>
+    </div>
+    <form class="booking-form-wrap reveal" id="bookingForm" novalidate>
+      <input type="hidden" id="bk-date" name="date" />
+      <input type="hidden" id="bk-time" name="time" />
+      <div class="bk-summary" id="bk-summary"></div>
+      <div class="form-row">
+        <div class="field">
+          <label for="bk-name" data-i18n="booking.form.name">Your name</label>
+          <input type="text" id="bk-name" name="name" required data-i18n-placeholder="form.name.ph" placeholder="John Doe" />
+        </div>
+        <div class="field">
+          <label for="bk-email" data-i18n="booking.form.email">Email</label>
+          <input type="email" id="bk-email" name="email" required data-i18n-placeholder="form.email.ph" placeholder="you@email.com" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="bk-company" data-i18n="booking.form.company">Company (optional)</label>
+        <input type="text" id="bk-company" name="company" data-i18n-placeholder="booking.form.company.ph" placeholder="Acme Inc." />
+      </div>
+      <div class="field">
+        <label for="bk-message" data-i18n="booking.form.message">What would you like to discuss?</label>
+        <textarea id="bk-message" name="message" required data-i18n-placeholder="booking.form.message.ph" placeholder="A short note about the topic..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+        <span data-i18n="booking.form.submit">Confirm booking</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+      <div class="form-success" id="bookingSuccess" data-i18n="booking.success">Booking confirmed! We&apos;ll be in touch shortly.</div>
+    </form>
+  </div>
+</section>
+
 <section class="mailto-section reveal" style="text-align:center;">
   <div class="container">
     <a href="mailto:info@nexcraft.org" class="mailto-hero">
@@ -1267,6 +1508,27 @@ const translations = {
     "form.sending": "Sending...",
     "form.success": "Message sent! We'll get back to you within 24 hours.",
     "form.error": "Something went wrong. Please try again or email info@nexcraft.org.",
+    "booking.tag": "Schedule",
+    "booking.title.1": "Book a",
+    "booking.title.2": "Meeting",
+    "booking.subtitle": "Wednesdays & Saturdays, 17:00–22:00. Pick a date and time below.",
+    "booking.pickdate": "Pick a Wednesday or Saturday from the calendar.",
+    "booking.choosetime": "Available times on {date}",
+    "booking.loading": "Loading available times…",
+    "booking.taken": "Zasedeno",
+    "booking.free": "Available",
+    "booking.empty": "No times available — pick another date.",
+    "booking.form.name": "Your name",
+    "booking.form.email": "Email",
+    "booking.form.company": "Company (optional)",
+    "booking.form.company.ph": "Acme Inc.",
+    "booking.form.message": "What would you like to discuss?",
+    "booking.form.message.ph": "A short note about the topic…",
+    "booking.form.submit": "Confirm booking",
+    "booking.sending": "Sending…",
+    "booking.success": "Booking confirmed! We'll be in touch shortly.",
+    "booking.error": "Could not save the booking. Please try again.",
+    "booking.summary": "Your slot",
     "nav.back": "Back",
     "hero.badge": "AI-powered digital agency",
     "index.hero.title": "We Build the Digital Future",
@@ -1449,6 +1711,27 @@ const translations = {
     "form.sending": "Pošiljanje...",
     "form.success": "Sporočilo poslano! Odgovorili vam bomo v 24 urah.",
     "form.error": "Prišlo je do napake. Poskusite znova ali pišite na info@nexcraft.org.",
+    "booking.tag": "Termin",
+    "booking.title.1": "Rezerviraj",
+    "booking.title.2": "sestanek",
+    "booking.subtitle": "Srede in sobote, 17:00–22:00. Izberi datum in uro spodaj.",
+    "booking.pickdate": "Iz koledarja izberi sredo ali soboto.",
+    "booking.choosetime": "Razpoložljivi termini za {date}",
+    "booking.loading": "Nalaganje terminov…",
+    "booking.taken": "Zasedeno",
+    "booking.free": "Prosto",
+    "booking.empty": "Ni prostih terminov — izberi drug datum.",
+    "booking.form.name": "Vaše ime",
+    "booking.form.email": "E-pošta",
+    "booking.form.company": "Podjetje (neobvezno)",
+    "booking.form.company.ph": "Acme d.o.o.",
+    "booking.form.message": "O čem bi se radi pogovorili?",
+    "booking.form.message.ph": "Kratka opomba o temi…",
+    "booking.form.submit": "Potrdi rezervacijo",
+    "booking.sending": "Pošiljanje…",
+    "booking.success": "Rezervacija potrjena! Kmalu se oglasimo.",
+    "booking.error": "Rezervacije ni bilo mogoče shraniti. Poskusite znova.",
+    "booking.summary": "Vaš termin",
     "nav.back": "Nazaj",
     "hero.badge": "AI digitalna agencija",
     "index.hero.title": "Gradimo digitalno prihodnost",
@@ -1671,6 +1954,215 @@ const translations = {
       }
     });
   }
+  // ---------- Booking ----------
+  const BK_WORKER = 'https://nexcraft-chat-proxy.nexcraft.workers.dev';
+  const BK_EMAILJS_PUBLIC_KEY = 'O7cCoB6ewCJtjaHJs';
+  const BK_EMAILJS_SERVICE_ID = 'service_wtmsevl';
+  const BK_EMAILJS_OWNER_TEMPLATE  = 'template_booking_owner';
+  const BK_EMAILJS_CLIENT_TEMPLATE = 'template_booking_client';
+  if (window.emailjs && typeof emailjs.init === 'function') {
+    try { emailjs.init({ publicKey: BK_EMAILJS_PUBLIC_KEY }); }
+    catch (e) { console.error('EmailJS init failed:', e); }
+  }
+  const BK_SLOTS = ['17:00','18:00','19:00','20:00','21:00','22:00'];
+  const BK_DOW = {
+    en: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    sl: ['Pon','Tor','Sre','Čet','Pet','Sob','Ned']
+  };
+  const BK_MONTHS = {
+    en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    sl: ['Januar','Februar','Marec','April','Maj','Junij','Julij','Avgust','September','Oktober','November','December']
+  };
+
+  let bkViewDate = (function(){ const t = new Date(); t.setDate(1); return t; })();
+  let bkSelectedDate = null;
+  let bkSelectedTime = null;
+  let bkTakenSlots = [];
+
+  function bkPad(n){ return n < 10 ? '0' + n : '' + n; }
+  function bkFmtDate(d){ return d.getFullYear() + '-' + bkPad(d.getMonth()+1) + '-' + bkPad(d.getDate()); }
+  function bkIsBookable(d){
+    const dow = d.getDay();
+    if (dow !== 3 && dow !== 6) return false;
+    const today = new Date(); today.setHours(0,0,0,0);
+    return d.getTime() >= today.getTime();
+  }
+
+  function bkRenderCal(){
+    const grid = document.getElementById('bk-cal-grid');
+    const monthLabel = document.getElementById('bk-monthlabel');
+    if (!grid || !monthLabel) return;
+    const lang = (typeof currentLang === 'string' && BK_MONTHS[currentLang]) ? currentLang : 'en';
+    const y = bkViewDate.getFullYear();
+    const m = bkViewDate.getMonth();
+    monthLabel.textContent = BK_MONTHS[lang][m] + ' ' + y;
+
+    let html = '';
+    for (const d of BK_DOW[lang]) html += '<div class="dow">' + d + '</div>';
+
+    const first = new Date(y, m, 1);
+    const lead = (first.getDay() + 6) % 7; // Monday-first
+    for (let i = 0; i < lead; i++) html += '<button type="button" disabled style="visibility:hidden"></button>';
+
+    const days = new Date(y, m + 1, 0).getDate();
+    for (let day = 1; day <= days; day++) {
+      const d = new Date(y, m, day);
+      const ds = bkFmtDate(d);
+      const bookable = bkIsBookable(d);
+      const sel = (bkSelectedDate === ds);
+      const cls = (bookable ? 'bookable' : '') + (sel ? ' selected' : '');
+      html += '<button type="button" class="' + cls + '" data-date="' + ds + '"' + (bookable ? '' : ' disabled') + '>' + day + '</button>';
+    }
+    grid.innerHTML = html;
+    grid.querySelectorAll('button[data-date]:not([disabled])').forEach(btn => {
+      btn.addEventListener('click', () => bkSelectDate(btn.dataset.date));
+    });
+  }
+
+  async function bkSelectDate(ds){
+    bkSelectedDate = ds;
+    bkSelectedTime = null;
+    document.getElementById('bookingForm').classList.remove('show');
+    bkRenderCal();
+    await bkLoadSlots(ds);
+  }
+
+  async function bkLoadSlots(ds){
+    const wrap = document.getElementById('bk-slots');
+    const title = document.getElementById('bk-slots-title');
+    const dict = translations[currentLang] || translations.en;
+    title.textContent = dict['booking.loading'] || 'Loading…';
+    wrap.innerHTML = '';
+    try {
+      const r = await fetch(BK_WORKER + '/api/bookings?date=' + encodeURIComponent(ds));
+      const data = await r.json();
+      bkTakenSlots = Array.isArray(data && data.taken) ? data.taken : [];
+    } catch (e) {
+      console.error('booking fetch', e);
+      bkTakenSlots = [];
+    }
+    title.textContent = (dict['booking.choosetime'] || 'Available times on {date}').replace('{date}', ds);
+
+    let html = '';
+    for (const t of BK_SLOTS) {
+      const taken = bkTakenSlots.indexOf(t) !== -1;
+      const sub = taken ? (dict['booking.taken'] || 'Zasedeno') : (dict['booking.free'] || 'Available');
+      html += '<button type="button" class="booking-slot' + (taken ? ' taken' : '') + '" data-time="' + t + '"' + (taken ? ' disabled' : '') + '><strong>' + t + '</strong><small>' + sub + '</small></button>';
+    }
+    wrap.innerHTML = html;
+    wrap.querySelectorAll('.booking-slot:not(.taken)').forEach(btn => {
+      btn.addEventListener('click', () => bkSelectSlot(btn.dataset.time));
+    });
+  }
+
+  function bkSelectSlot(t){
+    bkSelectedTime = t;
+    document.querySelectorAll('.booking-slot').forEach(b => b.classList.toggle('selected', b.dataset.time === t));
+    const form = document.getElementById('bookingForm');
+    form.classList.add('show');
+    document.getElementById('bk-date').value = bkSelectedDate;
+    document.getElementById('bk-time').value = t;
+    const dict = translations[currentLang] || translations.en;
+    document.getElementById('bk-summary').innerHTML = (dict['booking.summary'] || 'Your slot') + ': <strong>' + bkSelectedDate + ' &middot; ' + t + '</strong>';
+  }
+
+  // Hook the calendar into language toggling so month + dow labels swap
+  const __bkOrigApply = applyLanguage;
+  applyLanguage = function(lang){
+    __bkOrigApply(lang);
+    bkRenderCal();
+    if (bkSelectedDate) bkLoadSlots(bkSelectedDate);
+  };
+
+  document.getElementById('bk-prev').addEventListener('click', () => {
+    bkViewDate = new Date(bkViewDate.getFullYear(), bkViewDate.getMonth() - 1, 1);
+    bkRenderCal();
+  });
+  document.getElementById('bk-next').addEventListener('click', () => {
+    bkViewDate = new Date(bkViewDate.getFullYear(), bkViewDate.getMonth() + 1, 1);
+    bkRenderCal();
+  });
+
+  document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const dict = translations[currentLang] || translations.en;
+    const status = document.getElementById('bookingSuccess');
+    const btn = form.querySelector('button[type="submit"]');
+    const lbl = btn.querySelector('span');
+    const origLabel = lbl.textContent;
+    btn.disabled = true;
+    lbl.textContent = dict['booking.sending'] || 'Sending…';
+    status.classList.remove('show','error');
+
+    const fd = new FormData(form);
+    const payload = {
+      date: fd.get('date'),
+      time: fd.get('time'),
+      name: fd.get('name'),
+      email: fd.get('email'),
+      company: fd.get('company') || '',
+      message: fd.get('message')
+    };
+    try {
+      const r = await fetch(BK_WORKER + '/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw new Error(e.error || ('HTTP ' + r.status));
+      }
+
+      // Booking is in KV — fire owner + client notification emails (best-effort)
+      if (window.emailjs && typeof emailjs.send === 'function') {
+        const ownerParams = {
+          booking_name:    payload.name,
+          booking_email:   payload.email,
+          booking_company: payload.company || '',
+          booking_date:    payload.date,
+          booking_time:    payload.time,
+          booking_message: payload.message
+        };
+        const clientParams = {
+          booking_name:  payload.name,
+          booking_email: payload.email,
+          booking_date:  payload.date,
+          booking_time:  payload.time
+        };
+        try {
+          await Promise.all([
+            emailjs.send(BK_EMAILJS_SERVICE_ID, BK_EMAILJS_OWNER_TEMPLATE,  ownerParams),
+            emailjs.send(BK_EMAILJS_SERVICE_ID, BK_EMAILJS_CLIENT_TEMPLATE, clientParams)
+          ]);
+        } catch (mailErr) {
+          console.error('Booking email notification failed:', mailErr);
+          // Booking is saved; the user-visible success stays.
+        }
+      } else {
+        console.warn('EmailJS unavailable; booking saved without notifications.');
+      }
+
+      status.textContent = dict['booking.success'];
+      status.classList.add('show');
+      form.reset();
+      await bkLoadSlots(payload.date);
+    } catch (e) {
+      console.error('booking submit', e);
+      status.textContent = dict['booking.error'] || 'Could not save the booking. Please try again.';
+      status.classList.add('show', 'error');
+    } finally {
+      btn.disabled = false;
+      lbl.textContent = origLabel;
+      setTimeout(() => status.classList.remove('show'), 8000);
+    }
+  });
+
+  bkRenderCal();
+
+
   // ---------- Nav scroll effect ----------
   const navEl = document.getElementById('nav');
   if (navEl) window.addEventListener('scroll', () => {
