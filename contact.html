@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Professional AI videos for ads, social media and brand promotion. Fast, affordable, effective. Created by NexCraft.">
-<title>AI Video Production | NexCraft</title>
-<link rel="canonical" href="https://nexcraft.org/ai-video.html">
+<meta name="description" content="Contact NexCraft — let's work together on your next project. Quick reply within 24 hours.">
+<title>Contact | NexCraft</title>
+<link rel="canonical" href="https://nexcraft.org/contact.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,2 93,26 93,74 50,98 7,74 7,26' fill='%23111' stroke='%236366f1' stroke-width='4'/><text y='.9em' font-size='60' x='50%25' text-anchor='middle' dominant-baseline='middle' dy='0.1em' fill='url(%23g)' font-weight='bold' font-family='Arial'>N</text><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2306b6d4'/><stop offset='100%25' stop-color='%238b5cf6'/></linearGradient></defs></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
   --bg: #050509;
@@ -690,16 +691,10 @@ section { padding: 6rem 1.5rem; position: relative; }
 }
 .demo-box p { color: var(--text-dim); }
 .video-placeholders {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin-top: 3rem;
-}
-.video-placeholders > .video-placeholder {
-  flex: 0 0 270px;
-  max-width: 270px;
 }
 .video-placeholder {
   aspect-ratio: 9 / 16;
@@ -732,17 +727,6 @@ section { padding: 6rem 1.5rem; position: relative; }
   width: 56px; height: 56px;
   color: var(--accent-blue);
   filter: drop-shadow(0 0 12px var(--accent-blue));
-}
-.video-placeholder.video-filled {
-  background: #000;
-  padding: 0;
-}
-.video-placeholder.video-filled video {
-  width: 100%;
-  height: 100%;
-  border-radius: 18px;
-  object-fit: cover;
-  display: block;
 }
 .video-placeholder:hover {
   transform: translateY(-4px);
@@ -1071,6 +1055,74 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   .testimonial-card { flex-basis: 290px; padding: 1.5rem; }
   .marquee-track { animation-duration: 45s; }
 }
+
+/* ---------- Contact page mailto card ---------- */
+.mailto-section { padding-top: 1rem; padding-bottom: 5rem; }
+.mailto-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  backdrop-filter: blur(15px);
+}
+.mailto-hero::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  background: var(--gradient);
+  filter: blur(28px);
+  opacity: 0.22;
+  z-index: -1;
+  pointer-events: none;
+}
+.mailto-hero:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0, 212, 255, 0.25);
+}
+.mailto-hero:hover::before { opacity: 0.4; }
+.mailto-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.mailto-icon svg { width: 28px; height: 28px; }
+.mailto-text { display: flex; flex-direction: column; gap: 0.2rem; text-align: left; }
+.mailto-text .label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.mailto-text .address {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.contact-form-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -1120,99 +1172,67 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
     </div>
   </div>
 </nav>
+
 <header class="hero sub">
   <div class="hero-content">
     <h1>
-      <span data-i18n="video.hero.title.1">AI Video</span><br>
-      <span class="gradient" data-text="Production" data-i18n="video.hero.title.2">Production</span>
+      <span data-i18n="contact.title.1">Let&apos;s Work</span><br>
+      <span class="gradient" data-text="Together" data-i18n="contact.title.2">Together</span>
     </h1>
-    <p class="tagline" data-i18n="video.hero.tagline">Scroll-stopping videos created with AI. Fast, affordable, effective.</p>
+    <p class="tagline" data-i18n="contact.subtitle">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
   </div>
 </header>
+
 <section>
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag" data-i18n="video.solve.tag">The problem</div>
-      <h2 class="section-title">
-        <span data-i18n="video.solve.title.1">What</span>
-        <span class="gradient" data-i18n="video.solve.title.2">we solve</span>
-      </h2>
-    </div>
-    <div class="problem-block reveal" data-i18n="video.solve.body">Video content is the #1 driver of engagement online &mdash; but traditional video production is slow and expensive. We create professional AI videos in days, not weeks.</div>
+    <form class="contact-form contact-form-page reveal" id="contactForm" novalidate>
+      <input type="hidden" name="to_email" value="info@nexcraft.org" />
+      <div class="form-row">
+        <div class="field">
+          <label for="name" data-i18n="form.name">Your name</label>
+          <input type="text" id="name" name="name" required data-i18n-placeholder="form.name.ph" placeholder="John Doe" />
+        </div>
+        <div class="field">
+          <label for="email" data-i18n="form.email">Email</label>
+          <input type="email" id="email" name="email" required data-i18n-placeholder="form.email.ph" placeholder="you@email.com" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="service" data-i18n="form.service">I&apos;m interested in</label>
+        <select id="service" name="service">
+          <option value="web" data-i18n="form.service.web">Web Design &amp; Development</option>
+          <option value="ai" data-i18n="form.service.ai">AI Agenti</option>
+          <option value="video" data-i18n="form.service.video">AI Video</option>
+          <option value="other" data-i18n="form.service.other">Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message" data-i18n="form.message">Project details</label>
+        <textarea id="message" name="message" required data-i18n-placeholder="form.message.ph" placeholder="Tell us a bit about what you have in mind..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+        <span data-i18n="form.submit">Send message</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+      <div class="form-success" id="formSuccess" data-i18n="form.success">Message sent! We&apos;ll get back to you within 24 hours.</div>
+    </form>
   </div>
 </section>
-<section>
+
+<section class="mailto-section reveal" style="text-align:center;">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag" data-i18n="video.get.tag">Deliverables</div>
-      <h2 class="section-title">
-        <span data-i18n="video.get.title.1">What</span>
-        <span class="gradient" data-i18n="video.get.title.2">you get</span>
-      </h2>
-      <p class="section-subtitle" data-i18n="video.get.subtitle">Everything you need to capture attention online.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-        <h4 data-i18n="video.feat1">Social Media Videos</h4>
-        <p data-i18n="video.feat1.desc">Reels, shorts, TikToks that hook viewers.</p>
+    <a href="mailto:info@nexcraft.org" class="mailto-hero">
+      <div class="mailto-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div>
-        <h4 data-i18n="video.feat2">Ad Creatives</h4>
-        <p data-i18n="video.feat2.desc">Performance ads that convert.</p>
+      <div class="mailto-text">
+        <span class="label" data-i18n="contact.mailto.prefix">Or email us directly</span>
+        <span class="address">info@nexcraft.org</span>
       </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h4 data-i18n="video.feat3">AI Characters &amp; Avatars</h4>
-        <p data-i18n="video.feat3.desc">Custom characters that represent your brand.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-        <h4 data-i18n="video.feat4">Brand Videos</h4>
-        <p data-i18n="video.feat4.desc">Polished pieces for your website and channels.</p>
-      </div>
-    </div>
+    </a>
   </div>
 </section>
-<section>
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag" data-i18n="video.process.tag">Process</div>
-      <h2 class="section-title">
-        <span data-i18n="video.process.title.1">Our</span>
-        <span class="gradient" data-i18n="video.process.title.2">process</span>
-      </h2>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal"><div class="step-num">1</div><h4 data-i18n="video.process.s1">You share your idea or script</h4></div>
-      <div class="process-step reveal"><div class="step-num">2</div><h4 data-i18n="video.process.s2">We produce with AI tools</h4></div>
-      <div class="process-step reveal"><div class="step-num">3</div><h4 data-i18n="video.process.s3">You receive ready-to-publish video</h4></div>
-    </div>
-  </div>
-</section>
-<section>
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag" data-i18n="video.examples.tag">Examples</div>
-      <h2 class="section-title">
-        <span data-i18n="video.examples.title.1">Video</span>
-        <span class="gradient" data-i18n="video.examples.title.2">examples</span>
-      </h2>
-    </div>
-    <div class="video-placeholders">
-      <div class="video-placeholder video-filled reveal"><video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; border-radius:16px;"><source src="assets/nexcraft.promo2.video.mp4" type="video/mp4"></video></div>
-      <div class="video-placeholder video-filled reveal"><video src="assets/nexcraft.promovideo.mp4" controls playsinline preload="metadata"></video></div>
-    </div>
-  </div>
-</section>
-<section class="cta-section reveal">
-  <h2 data-i18n="video.cta.title">Need a video for your brand?</h2>
-  <a href="contact.html" class="btn btn-primary">
-    <span data-i18n="video.cta.btn">Contact Us</span>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </a>
-</section>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">NexCraft</div>
@@ -1228,6 +1248,25 @@ const translations = {
     "nav.how": "How We Work",
     "nav.testimonials": "Reviews",
     "nav.contact": "Contact",
+    "contact.title.1": "Let's Work",
+    "contact.title.2": "Together",
+    "contact.subtitle": "Tell us about your project and we'll get back to you within 24 hours.",
+    "contact.mailto.prefix": "Or email us directly",
+    "form.name": "Your name",
+    "form.name.ph": "John Doe",
+    "form.email": "Email",
+    "form.email.ph": "you@email.com",
+    "form.service": "I'm interested in",
+    "form.service.web": "Web Design & Development",
+    "form.service.ai": "AI Agenti",
+    "form.service.video": "AI Video",
+    "form.service.other": "Something else",
+    "form.message": "Project details",
+    "form.message.ph": "Tell us a bit about what you have in mind...",
+    "form.submit": "Send message",
+    "form.sending": "Sending...",
+    "form.success": "Message sent! We'll get back to you within 24 hours.",
+    "form.error": "Something went wrong. Please try again or email info@nexcraft.org.",
     "nav.back": "Back",
     "hero.badge": "AI-powered digital agency",
     "index.hero.title": "We Build the Digital Future",
@@ -1381,6 +1420,7 @@ const translations = {
     "video.examples.tag": "Examples",
     "video.examples.title.1": "Video",
     "video.examples.title.2": "examples",
+    "video.examples.subtitle": "Portfolio videos coming soon.",
     "video.examples.placeholder": "Coming soon",
     "video.cta.title": "Need a video for your brand?",
     "video.cta.btn": "Contact Us"
@@ -1390,6 +1430,25 @@ const translations = {
     "nav.how": "Kako delamo",
     "nav.testimonials": "Mnenja",
     "nav.contact": "Kontakt",
+    "contact.title.1": "Sodelujmo",
+    "contact.title.2": "skupaj",
+    "contact.subtitle": "Povejte nam o svojem projektu in odgovorili vam bomo v 24 urah.",
+    "contact.mailto.prefix": "Ali nam pišite direktno",
+    "form.name": "Vaše ime",
+    "form.name.ph": "Janez Novak",
+    "form.email": "E-pošta",
+    "form.email.ph": "vi@email.com",
+    "form.service": "Zanima me",
+    "form.service.web": "Spletni dizajn in razvoj",
+    "form.service.ai": "AI Agenti",
+    "form.service.video": "AI Video",
+    "form.service.other": "Nekaj drugega",
+    "form.message": "Podrobnosti projekta",
+    "form.message.ph": "Povejte nam nekaj o tem, kaj imate v mislih...",
+    "form.submit": "Pošlji sporočilo",
+    "form.sending": "Pošiljanje...",
+    "form.success": "Sporočilo poslano! Odgovorili vam bomo v 24 urah.",
+    "form.error": "Prišlo je do napake. Poskusite znova ali pišite na info@nexcraft.org.",
     "nav.back": "Nazaj",
     "hero.badge": "AI digitalna agencija",
     "index.hero.title": "Gradimo digitalno prihodnost",
@@ -1543,6 +1602,7 @@ const translations = {
     "video.examples.tag": "Primeri",
     "video.examples.title.1": "Primeri",
     "video.examples.title.2": "videov",
+    "video.examples.subtitle": "Primeri videov kmalu na voljo.",
     "video.examples.placeholder": "Kmalu na voljo",
     "video.cta.title": "Potrebujete video za svojo blagovno znamko?",
     "video.cta.btn": "Kontaktirajte nas"
@@ -1572,6 +1632,45 @@ const translations = {
   if (langToggleEl) langToggleEl.addEventListener('click', () => {
     applyLanguage(currentLang === 'en' ? 'sl' : 'en');
   });
+
+  // ---------- EmailJS ----------
+  const EMAILJS_PUBLIC_KEY = 'O7cCoB6ewCJtjaHJs';
+  const EMAILJS_SERVICE_ID = 'service_wtmsevl';
+  const EMAILJS_TEMPLATE_ID = 'template_hz47xuk';
+  if (window.emailjs && emailjs.init) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const status = document.getElementById('formSuccess');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const submitLabel = submitBtn.querySelector('span');
+      const originalLabel = submitLabel.textContent;
+      const dict = translations[currentLang] || translations.en;
+      submitBtn.disabled = true;
+      submitLabel.textContent = dict['form.sending'] || 'Sending...';
+      status.classList.remove('show', 'error');
+      try {
+        if (!window.emailjs) throw new Error('EmailJS SDK failed to load');
+        await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
+        status.textContent = dict['form.success'];
+        status.classList.add('show');
+        form.reset();
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        status.textContent = dict['form.error'] || 'Something went wrong. Please try again.';
+        status.classList.add('show', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitLabel.textContent = originalLabel;
+        setTimeout(() => status.classList.remove('show'), 7000);
+      }
+    });
+  }
   // ---------- Nav scroll effect ----------
   const navEl = document.getElementById('nav');
   if (navEl) window.addEventListener('scroll', () => {

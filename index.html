@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
   --bg: #050509;
@@ -1316,7 +1315,7 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
       <li><a href="#services" data-i18n="nav.services">Services</a></li>
       <li><a href="#how-we-work" data-i18n="nav.how">How We Work</a></li>
       <li><a href="#reviews" data-i18n="nav.testimonials">Reviews</a></li>
-      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div style="display:flex;gap:0.5rem;align-items:center;">
       <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
@@ -1527,69 +1526,6 @@ footer p { color: var(--text-muted); font-size: 0.88rem; }
   </div>
 </section>
 
-<section id="contact">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-tag" data-i18n="contact.tag">Let&apos;s talk</div>
-      <h2 class="section-title">
-        <span data-i18n="contact.title.1">Let&apos;s Work</span>
-        <span class="gradient" data-i18n="contact.title.2">Together</span>
-      </h2>
-      <p class="section-subtitle" data-i18n="contact.subtitle">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
-    </div>
-    <div class="contact-wrap">
-      <div class="contact-info reveal">
-        <h3 data-i18n="contact.info.title">Get in touch</h3>
-        <p data-i18n="contact.info.desc">Whatever you need — website, AI agent, or video — drop us a line and we&apos;ll figure it out together.</p>
-        <ul class="contact-list">
-          <li>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <a href="mailto:info@nexcraft.org" class="contact-link">info@nexcraft.org</a>
-          </li>
-          <li>
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <span data-i18n="contact.info.location">Europe</span>
-          </li>
-        </ul>
-      </div>
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <input type="hidden" name="to_email" value="info@nexcraft.org" />
-        <div class="form-row">
-          <div class="field">
-            <label for="name" data-i18n="form.name">Your name</label>
-            <input type="text" id="name" name="name" required data-i18n-placeholder="form.name.ph" placeholder="John Doe" />
-          </div>
-          <div class="field">
-            <label for="email" data-i18n="form.email">Email</label>
-            <input type="email" id="email" name="email" required data-i18n-placeholder="form.email.ph" placeholder="you@email.com" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="service" data-i18n="form.service">I&apos;m interested in</label>
-          <select id="service" name="service">
-            <option value="web" data-i18n="form.service.web">Web Design &amp; Development</option>
-            <option value="ai" data-i18n="form.service.ai">AI Agenti</option>
-            <option value="video" data-i18n="form.service.video">AI Video</option>
-            <option value="other" data-i18n="form.service.other">Something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="message" data-i18n="form.message">Project details</label>
-          <textarea id="message" name="message" required data-i18n-placeholder="form.message.ph" placeholder="Tell us a bit about what you have in mind..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
-          <span data-i18n="form.submit">Send message</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-        <div class="form-success" id="formSuccess" data-i18n="form.success">Message sent! We&apos;ll get back to you within 24 hours.</div>
-      </form>
-    </div>
-  </div>
-</section>
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">NexCraft</div>
